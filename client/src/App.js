@@ -13,6 +13,9 @@ function App() {
   const [shoppingCart, setShoppingCart] = useState(
     loadFromLocal('shoppingCart') ?? []
   );
+  const [activeClub, setActiveClub] = useState(
+    loadFromLocal('activeClub') ?? null
+  );
   const [clubs, setClubs] = useState(loadFromLocal('footballClubs') ?? []);
   const [isShowingEditModal, setIsShowingEditModal] = useState(false);
 
@@ -26,12 +29,16 @@ function App() {
       .then((result) => result.json())
       .then((apiPlayers) => setPlayers(apiPlayers))
       .catch((error) => console.log(error.message));
-
-    fetch('http://localhost:4000/shopping-cart/60b3b08548f2311120994168')
-      .then((result) => result.json())
-      .then((shoppingCart) => setShoppingCart(shoppingCart))
-      .catch((error) => console.error(error.message));
   }, []);
+
+  useEffect(() => {
+    if (activeClub) {
+      fetch('http://localhost:4000/shopping-cart/' + activeClub._id)
+        .then((result) => result.json())
+        .then((shoppingCart) => setShoppingCart(shoppingCart))
+        .catch((error) => console.error(error.message));
+    }
+  }, [activeClub]);
 
   useEffect(() => {
     saveToLocal('footballPlayers', players);
@@ -44,6 +51,10 @@ function App() {
   useEffect(() => {
     saveToLocal('footballClubs', clubs);
   }, [clubs]);
+
+  useEffect(() => {
+    saveToLocal('activeClub', activeClub);
+  }, [activeClub]);
 
   function addPlayer(player) {
     fetch('http://localhost:4000/players', {
@@ -65,7 +76,7 @@ function App() {
   }
 
   function addToShoppingCart(playerToAdd) {
-    fetch('http://localhost:4000/shopping-cart/60b3b08548f2311120994168', {
+    fetch('http://localhost:4000/shopping-cart/' + activeClub._id, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ player: playerToAdd._id }),
@@ -128,7 +139,7 @@ function App() {
       ),
     };
 
-    fetch('http://localhost:4000/shopping-cart/60b3b08548f2311120994168', {
+    fetch('http://localhost:4000/shopping-cart/' + activeClub._id, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(shoppingCartToUpdate),
@@ -140,7 +151,12 @@ function App() {
 
   return (
     <>
-      <Header numberOfShoppingCartItems={shoppingCart?.players?.length} />
+      <Header
+        clubs={clubs}
+        numberOfShoppingCartItems={shoppingCart?.players?.length}
+        onChangeClub={setActiveClub}
+        activeClub={activeClub}
+      />
       <main>
         <Switch>
           <Route exact path="/">
@@ -152,6 +168,7 @@ function App() {
               onAddPlayer={updatePlayer}
               openEditModal={() => setIsShowingEditModal(true)}
               isShowingEditModal={isShowingEditModal}
+              activeClub={activeClub}
             />
           </Route>
           <Route path="/addplayer">

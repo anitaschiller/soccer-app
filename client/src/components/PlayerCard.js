@@ -7,12 +7,15 @@ export default function PlayerCard({
   onAddToShoppingCart,
   onDeletePlayer,
   onOpenEditModal,
+  activeClub,
 }) {
   return (
     <Card>
-      <ShoppingCart onClick={() => onAddToShoppingCart(player)}>
-        <Football />
-      </ShoppingCart>
+      {activeClub && (
+        <ShoppingCart onClick={() => onAddToShoppingCart(player)}>
+          <Football />
+        </ShoppingCart>
+      )}
       <h3>{player.name}</h3>
       <p>{player.price}</p>
       <p>{player.club}</p>
@@ -82,10 +85,15 @@ const StyledPen = styled(Pen)`
   width: 1rem;
 `;
 
-const ShoppingCart = styled(Football)`
-  width: 2.8rem;
-  position: absolute;
-  top: 0.5rem;
-  right: 0.2rem;
+const ShoppingCart = styled.button`
+  background: none;
+  border: none;
   cursor: pointer;
+  height: 2.8rem;
+  width: 2.8rem;
+  padding: 0;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.5rem;
+  z-index: 10;
 `;

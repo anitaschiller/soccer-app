@@ -1,10 +1,31 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as Football } from '../assets/football.svg';
+import { ReactComponent as UserCircle } from '../assets/user_circle.svg';
 import Logo from '../assets/dfb_logo.png';
 
-export default function Header({ numberOfShoppingCartItems }) {
+export default function Header({
+  clubs,
+  numberOfShoppingCartItems,
+  onChangeClub,
+  activeClub,
+}) {
+  const [showClubSelector, setShowClubSelector] = useState(false);
+
+  const renderClubs = (clubs) =>
+    clubs.map((club) => (
+      <li
+        onClick={() => {
+          onChangeClub(club);
+          setShowClubSelector(!showClubSelector);
+        }}
+      >
+        {club.name}
+      </li>
+    ));
+
   return (
     <HeaderNavigation>
       <NavLink to="/">
@@ -19,6 +40,21 @@ export default function Header({ numberOfShoppingCartItems }) {
           <span>Add player</span>
         </ShoppingCartDisplay>
       </NavLink>
+
+      <UserProfile
+        href="/#"
+        onClick={(event) => {
+          event.preventDefault();
+          setShowClubSelector(!showClubSelector);
+        }}
+      >
+        <FlexWrapper>
+          <UserCircle />
+          <span>{activeClub && activeClub.name}</span>
+        </FlexWrapper>
+
+        {showClubSelector && <ClubSelector>{renderClubs(clubs)}</ClubSelector>}
+      </UserProfile>
 
       <NavLink to="/cart">
         <ShoppingCartDisplay highlight={numberOfShoppingCartItems}>
@@ -42,11 +78,56 @@ const HeaderNavigation = styled.header`
   top: 0;
   right: 0;
   left: 0;
+  z-index: 100;
 
   a {
     text-decoration: none;
     color: hsl(340, 10%, 5%);
   }
+`;
+
+const UserProfile = styled.a`
+  position: relative;
+
+  svg {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    width: 12rem;
+    margin-left: 0.5rem;
+  }
+`;
+
+const ClubSelector = styled.ul`
+  background: white;
+  border-radius: 0.7rem;
+  box-shadow: 0 0.3rem 0.5rem rgba(30, 30, 30, 0.4);
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 1rem;
+  position: absolute;
+  width: 16rem;
+  z-index: 100;
+  li {
+    margin-bottom: 0.3rem;
+  }
+  li:hover {
+    color: hsl(160, 60%, 50%);
+  }
+`;
+
+const ShoppingCartDisplay = styled.section`
+  display: flex;
+  align-items: center;
+
+  font-weight: ${(props) => props.highlight && 'bold'};
 
   svg {
     width: 3rem;
@@ -60,13 +141,6 @@ const HeaderNavigation = styled.header`
   svg path.st25 {
     fill: hsl(340, 60%, 50%);
   }
-`;
-
-const ShoppingCartDisplay = styled.section`
-  display: flex;
-  align-items: center;
-
-  font-weight: ${(props) => props.highlight && 'bold'};
 `;
 
 const PlusIcon = styled.span`

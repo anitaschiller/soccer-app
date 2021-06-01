@@ -11,6 +11,7 @@ export default function Home({
   onAddPlayer,
   openEditModal,
   isShowingEditModal,
+  activeClub,
 }) {
   const [playerToEdit, setPlayerToEdit] = useState({});
 
@@ -29,6 +30,7 @@ export default function Home({
             onAddToShoppingCart={onAddToShoppingCart}
             onDeletePlayer={onDeletePlayer}
             onOpenEditModal={openModal}
+            activeClub={activeClub}
           />
         ))}
         {isShowingEditModal && (

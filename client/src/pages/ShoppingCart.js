@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
-  const totalSum = shoppingCart.transferSum;
+  const totalSum = shoppingCart?.transferSum ?? 0;
   const formatedSum = (sum) =>
     new Intl.NumberFormat('de-DE', {
       style: 'currency',
@@ -20,7 +20,7 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
           </tr>
         </thead>
         <tbody>
-          {shoppingCart.players.map((orderLine, index) => (
+          {shoppingCart?.players.map((orderLine, index) => (
             <tr key={orderLine.player._id}>
               <td>{orderLine.player.name}</td>
               <td className="align-right">

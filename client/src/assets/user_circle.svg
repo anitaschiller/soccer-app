@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="113.111" height="104.121" viewBox="0 0 113.111 104.121">
+  <g id="Gruppe_1" data-name="Gruppe 1" transform="translate(-260 -152)">
+    <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(260 152)" fill="none" stroke="#707070" stroke-width="4">
+      <circle cx="51" cy="51" r="51" stroke="none"/>
+      <circle cx="51" cy="51" r="49" fill="none"/>
+    </g>
+    <g id="Icon_feather-user" data-name="Icon feather-user" transform="translate(280.877 171.361)">
+      <path id="Pfad_3" data-name="Pfad 3" d="M54.246,40.592V34.562A12.062,12.062,0,0,0,42.185,22.5H18.062A12.062,12.062,0,0,0,6,34.562v6.031" transform="translate(0 18.185)" fill="none" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Pfad_4" data-name="Pfad 4" d="M36.123,16.562A12.062,12.062,0,1,1,24.062,4.5,12.062,12.062,0,0,1,36.123,16.562Z" transform="translate(6.062 0)" fill="none" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+    <path id="Pfad_5" data-name="Pfad 5" d="M353,244l10.05,10.05L373.1,244" transform="translate(-1.05 -0.05)" fill="none" stroke="#707070" stroke-width="3"/>
+  </g>
+</svg>
