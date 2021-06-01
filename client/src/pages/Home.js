@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import PlayerCard from '../components/PlayerCard';
 import PlayerForm from '../components/PlayerForm';
@@ -47,6 +48,17 @@ export default function Home({
     </>
   );
 }
+
+Home.propTypes = {
+  players: PropTypes.arrayOf(PropTypes.object),
+  onAddToShoppingCart: PropTypes.func,
+  onDeletePlayer: PropTypes.func,
+  clubs: PropTypes.arrayOf(PropTypes.object),
+  onAddPlayer: PropTypes.func,
+  openEditModal: PropTypes.func,
+  isShowingEditModal: PropTypes.bool,
+  activeClub: PropTypes.object,
+};
 
 const Players = styled.div`
   display: flex;

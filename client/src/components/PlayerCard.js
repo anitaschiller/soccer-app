@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { ReactComponent as Football } from '../assets/football.svg';
 import { ReactComponent as Pen } from '../assets/pencil.svg';
 
@@ -32,6 +33,14 @@ export default function PlayerCard({
     </Card>
   );
 }
+
+PlayerCard.propTypes = {
+  player: PropTypes.object,
+  onAddToShoppingCart: PropTypes.func,
+  onDeletePlayer: PropTypes.func,
+  onOpenEditModal: PropTypes.func,
+  activeClub: PropTypes.object,
+};
 
 const Card = styled.article`
   background: hsl(160, 60%, 50%);

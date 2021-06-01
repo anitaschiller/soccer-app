@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -17,6 +18,7 @@ export default function Header({
   const renderClubs = (clubs) =>
     clubs.map((club) => (
       <li
+        key={club._id}
         onClick={() => {
           onChangeClub(club);
           setShowClubSelector(!showClubSelector);
@@ -67,6 +69,13 @@ export default function Header({
     </HeaderNavigation>
   );
 }
+
+Header.propTypes = {
+  clubs: PropTypes.arrayOf(PropTypes.object),
+  numberOfShoppingCartItems: PropTypes.number,
+  onChangeClub: PropTypes.func,
+  activeClub: PropTypes.object,
+};
 
 const HeaderNavigation = styled.header`
   display: flex;

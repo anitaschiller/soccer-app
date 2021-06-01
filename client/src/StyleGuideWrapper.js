@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import GlobalStyles from './GlobalStyles';
 
 function StyleGuideWrapper({ children }) {
@@ -8,5 +9,9 @@ function StyleGuideWrapper({ children }) {
     </>
   );
 }
+
+StyleGuideWrapper.propTypes = {
+  children: PropTypes.array,
+};
 
 export default StyleGuideWrapper;

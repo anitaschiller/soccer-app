@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
@@ -20,7 +21,7 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
           </tr>
         </thead>
         <tbody>
-          {shoppingCart?.players.map((orderLine, index) => (
+          {shoppingCart?.players.map((orderLine) => (
             <tr key={orderLine.player._id}>
               <td>{orderLine.player.name}</td>
               <td className="align-right">
@@ -45,6 +46,12 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
     </>
   );
 }
+
+ShoppingCart.propTypes = {
+  shoppingCart: PropTypes.object,
+  onRemovePlayer: PropTypes.func,
+};
+
 const Table = styled.table`
   margin: 0 auto;
   border-collapse: collapse;
