@@ -11,7 +11,7 @@ export default function PlayerCard({
   activeClub,
 }) {
   return (
-    <Card>
+    <Card data-testid="player-card">
       {activeClub && (
         <ShoppingCart onClick={() => onAddToShoppingCart(player)}>
           <Football />
