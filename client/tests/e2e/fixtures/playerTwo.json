@@ -1,0 +1,9 @@
+{
+  "skills": ["SOLIDITY", "FASTNESS"],
+  "name": "Thomas Müller",
+  "price": 40000,
+  "free_transfer": false,
+  "club": "FC Bayern München",
+  "position": "midfield",
+  "email": "thomas@dfb.by"
+}
