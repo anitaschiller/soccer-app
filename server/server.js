@@ -32,9 +32,9 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-// server.get('/', (req, res) => {
-//   res.json({ status: 'Server is running' });
-// });
+server.get('/health', (req, res) => {
+  res.json({ status: 'Server is running' });
+});
 
 server.use(clubRoutes);
 server.use(playerRoutes);
