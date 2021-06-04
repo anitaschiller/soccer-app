@@ -13,8 +13,6 @@ const __dirname = dirname(import.meta.url);
 
 dotenv.config();
 
-console.log(process.env, 'ENVS');
-
 const DB_NAME = process.env.DB_NAME || 'soccer-app';
 
 const connectionString = process.env.DB_CONNECTION
