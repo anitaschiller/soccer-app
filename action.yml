@@ -1,0 +1,5 @@
+name: 'Soccer App Cypress E2E Tests'
+description: 'GitHub Action for running Cypress E2E Tests'
+runs:
+  using: 'node12'
+  main: 'server/server.js'
