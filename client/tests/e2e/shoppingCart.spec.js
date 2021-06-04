@@ -17,20 +17,25 @@ describe('ShoppingCart', () => {
     cy.fixture('playerTwo').then((player) =>
       cy.request('POST', SERVER_URL + '/players', player)
     );
-    cy.visit('/');
   });
   it('should create a shopping cart for the selected football club', () => {
+    cy.visit('/');
     cy.get('[data-testid="club-selection"]').click();
     cy.get('header ul li').first().click();
     cy.get('main article button').first().click();
+    cy.get('main article button').eq(1).click();
+    cy.get('[href="/cart"]').should('contain', '2 items');
     cy.get('[href="/cart"]').click();
-    cy.get('[data-testid="saved-player"]').should('have.length', 1);
+    cy.get('[data-testid="saved-player"]').should('have.length', 2);
   });
   it('should show a total of the players prices as "sum total"', () => {
+    cy.visit('/');
     cy.get('[data-testid="club-selection"]').click();
     cy.get('header ul li').first().click();
     cy.get('main article button').first().click();
+    cy.get('main article button').eq(1).click();
+    cy.get('[href="/cart"]').should('contain', '2 items');
     cy.get('[href="/cart"]').click();
-    cy.get('tfoot').should('contain', '10.000');
+    cy.get('tfoot').should('contain', '50.000');
   });
 });
