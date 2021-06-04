@@ -16,3 +16,4 @@ jobs:
           command: npm run cy:run
         env:
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          DB_NAME: 'soccer-app-test'
