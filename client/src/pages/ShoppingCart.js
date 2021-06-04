@@ -21,7 +21,7 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
           </tr>
         </thead>
         <tbody>
-          {shoppingCart?.players.map((orderLine) => (
+          {shoppingCart?.players?.map((orderLine) => (
             <tr key={orderLine.player._id}>
               <td>{orderLine.player.name}</td>
               <td className="align-right">

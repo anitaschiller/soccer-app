@@ -6,11 +6,13 @@ import clubRoutes from './routes/club.routes.js';
 import playerRoutes from './routes/player.routes.js';
 import shoppingCartRoutes from './routes/shoppingCart.routes.js';
 
-
 dotenv.config();
 
-const connectionString =
-  process.env.DB_CONNECTION || 'mongodb://localhost:27017/soccer-app';
+const DB_NAME = process.env.DB_NAME || 'soccer-app';
+
+const connectionString = process.env.DB_CONNECTION
+  ? process.env.DB_CONNECTION.replace('%DB_NAME%', DB_NAME)
+  : 'mongodb://localhost:27017/' + DB_NAME;
 
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
