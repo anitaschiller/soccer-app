@@ -23,6 +23,7 @@ describe('ShoppingCart', () => {
     cy.get('[data-testid="club-selection"]').click();
     cy.get('header ul li').first().click();
     cy.get('main article button').first().click();
+    cy.get('[href="/cart"]').should('contain', '1 item');
     cy.get('main article button').eq(1).click();
     cy.get('[href="/cart"]').should('contain', '2 items');
     cy.get('[href="/cart"]').click();
@@ -33,6 +34,7 @@ describe('ShoppingCart', () => {
     cy.get('[data-testid="club-selection"]').click();
     cy.get('header ul li').first().click();
     cy.get('main article button').first().click();
+    cy.get('[href="/cart"]').should('contain', '1 item');
     cy.get('main article button').eq(1).click();
     cy.get('[href="/cart"]').should('contain', '2 items');
     cy.get('[href="/cart"]').click();
