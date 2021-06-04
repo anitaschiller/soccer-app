@@ -32,7 +32,7 @@ export default function Tags({
       <label htmlFor="tags">{headline}</label>
       <TagsContainer>
         {tags?.map((tag, index) => (
-          <Tag key={index + tag}>
+          <Tag data-testid="tag" key={index + tag}>
             {tag}
             <span onClick={() => onDeleteTag(tag)}>&times;</span>
           </Tag>
