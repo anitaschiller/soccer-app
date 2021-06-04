@@ -10,12 +10,15 @@
     "client": "cd ./client && npm start",
     "server": "nodemon ./server/server.js",
     "start": "node ./server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "DB_NAME=soccer-app-test start-server-and-test 'npm run dev' http://localhost:3000 cy:open",
+    "cy:open": "cd ./client && npm run cy:open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^6.2.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "start-server-and-test": "^1.12.4"
   }
 }

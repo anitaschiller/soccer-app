@@ -1,8 +1,16 @@
 /// <reference types="Cypress"/>
 
+const SERVER_URL = 'http://localhost:4000';
+
 describe('PlayerForm', () => {
-  it('should render the headline', () => {
+  beforeEach(() => {
+    cy.request(SERVER_URL + '/prune-database');
+    cy.fixture('clubTwo').then((club) =>
+      cy.request('POST', SERVER_URL + '/clubs', club)
+    );
     cy.visit('/');
+  });
+  it('should render the headline', () => {
     cy.get('[href="/addplayer"]').click();
     cy.get('form h2').contains('Add a new player');
   });
@@ -15,6 +23,7 @@ describe('PlayerForm', () => {
       email: 'cristiano@casa-mama.pr',
       skills: ['theatricality'],
     };
+    cy.get('[href="/addplayer"]').click();
     cy.get('[name="name"]').type(player.name);
     cy.get('[name="price"]').type(player.price);
     cy.get('[name="club"]').select(player.club);
