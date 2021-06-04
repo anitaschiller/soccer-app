@@ -14,7 +14,5 @@ jobs:
           start: npm start
           wait-on: 'http://localhost:4000'
           command: npm run cy:run
-          # Cypress is not needed to be installed outside
-          install: false
         env:
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
