@@ -12,7 +12,9 @@
     "start": "node ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:e2e": "DB_NAME=soccer-app-test start-server-and-test 'npm run dev' http://localhost:3000 cy:open",
-    "cy:open": "cd ./client && npm run cy:open"
+    "test:e2e:ci": "npm run cy:run",
+    "cy:open": "cd ./client && npm run cy:open",
+    "cy:run": "cd ./client && npm run cy:run"
   },
   "author": "",
   "license": "ISC",
