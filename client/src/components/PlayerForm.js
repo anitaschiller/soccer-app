@@ -70,7 +70,7 @@ export default function PlayerForm({
   return (
     <Form onSubmit={handleFormSubmit}>
       <h2>{headlineText}</h2>
-      <ErrorBox isError={isError}>
+      <ErrorBox data-testid="form-error-display" isError={isError}>
         <p>You have an error in your form.</p>
       </ErrorBox>
       <label htmlFor="playerName">Player Name</label>
