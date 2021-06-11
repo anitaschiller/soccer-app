@@ -6,7 +6,6 @@ async function getShoppingCart(req, res) {
   const shoppingCart = await ShoppingCart.findOne({ club: clubId }).populate(
     'players.player'
   );
-
   res.json(shoppingCart);
 }
 

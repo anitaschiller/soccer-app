@@ -1,29 +1,48 @@
 import Player from '../models/player.model.js';
 
 function getPlayers(req, res) {
-  Player.find().then((result) => res.json(result));
+  Player.find()
+    .populate('image')
+    .exec((error, result) => {
+      if (error) {
+        res.json(error.message);
+      } else {
+        res.json(result);
+      }
+    });
 }
 
-function sendPlayer(req, res) {
+async function sendPlayer(req, res) {
   const newPlayer = new Player({
-    name: req.body.name,
-    price: req.body.price,
-    free_transfer: req.body.free_transfer,
-    club: req.body.club,
-    position: req.body.position,
-    skills: req.body.skills,
-    email: req.body.email,
+    ...req.body,
   });
 
-  newPlayer.save().then((result) => res.json(result));
+  try {
+    const savedPlayer = await newPlayer.save();
+    const savedPlayerWithImage = await savedPlayer
+      .populate('image')
+      .execPopulate();
+    res.json(savedPlayerWithImage);
+  } catch {
+    res.json({ success: false, message: error.message });
+  }
 }
 
-function updatePlayer(req, res) {
+async function updatePlayer(req, res) {
   const { playerId } = req.params;
-  const updatedPlayer = req.body;
-  Player.findByIdAndUpdate({ _id: playerId }, req.body, (error, doc) => {
-    res.json(doc);
-  });
+  const playerToUpdate = {
+    ...req.body,
+  };
+
+  try {
+    const updatedPlayer = await Player.findByIdAndUpdate(
+      { _id: playerId },
+      playerToUpdate
+    ).populate('image');
+    res.json(updatedPlayer);
+  } catch {
+    res.json({ success: false, message: error.message });
+  }
 }
 
 function deletePlayer(req, res) {

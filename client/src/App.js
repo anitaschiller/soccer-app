@@ -57,7 +57,7 @@ function App() {
   }, [activeClub]);
 
   function addPlayer(player) {
-    fetch('http://localhost:4000/players', {
+    fetch('/players', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -68,6 +68,7 @@ function App() {
         position: player.position,
         skills: player.skills,
         email: player.email,
+        image: player?.image,
       }),
     })
       .then((result) => result.json())
@@ -76,7 +77,7 @@ function App() {
   }
 
   function addToShoppingCart(playerToAdd) {
-    fetch('http://localhost:4000/shopping-cart/' + activeClub._id, {
+    fetch('/shopping-cart/' + activeClub._id, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ player: playerToAdd._id }),
@@ -87,7 +88,7 @@ function App() {
   }
 
   function deletePlayer(playerToDelete) {
-    fetch(`http://localhost:4000/players/${playerToDelete._id}`, {
+    fetch(`/players/${playerToDelete._id}`, {
       method: 'DELETE',
     })
       .then((result) => result.json())
@@ -109,7 +110,7 @@ function App() {
       (player) => player._id !== playerToEdit._id
     );
 
-    fetch(`http://localhost:4000/players/${playerToEdit._id}`, {
+    fetch(`/players/${playerToEdit._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -120,6 +121,7 @@ function App() {
         position: playerToEdit.position,
         skills: playerToEdit.skills,
         email: playerToEdit.email,
+        image: playerToEdit?.image,
       }),
     })
       .then((result) => result.json())
