@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import PlayerForm from './components/PlayerForm';
 import ShoppingCart from './pages/ShoppingCart';
 import { saveToLocal, loadFromLocal } from './lib/localStorage';
+import ThemeContext from './context/ThemeContext';
 
 function App() {
   const [players, setPlayers] = useState(
@@ -181,10 +182,12 @@ function App() {
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart
-              shoppingCart={shoppingCart}
-              onRemovePlayer={removePlayer}
-            />
+            <ThemeContext.Provider value={{ activeClub }}>
+              <ShoppingCart
+                shoppingCart={shoppingCart}
+                onRemovePlayer={removePlayer}
+              />
+            </ThemeContext.Provider>
           </Route>
         </Switch>
       </main>

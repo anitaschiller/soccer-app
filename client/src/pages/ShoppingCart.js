@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ThemedButton from '../components/ThemedButton';
 
 export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
   const totalSum = shoppingCart?.transferSum ?? 0;
@@ -9,6 +10,7 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
       currency: 'EUR',
       maximumFractionDigits: 0,
     }).format(sum);
+
   return (
     <>
       <h2>Shopping Cart</h2>
@@ -43,6 +45,7 @@ export default function ShoppingCart({ shoppingCart, onRemovePlayer }) {
           </tr>
         </tfoot>
       </Table>
+      <ThemedButton text="Checkout" />
     </>
   );
 }
