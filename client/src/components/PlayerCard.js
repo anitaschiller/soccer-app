@@ -10,6 +10,12 @@ export default function PlayerCard({
   onOpenEditModal,
   activeClub,
 }) {
+  function serverUrl() {
+    return process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000'
+      : '';
+  }
+
   return (
     <Card data-testid="player-card">
       {activeClub && (
@@ -18,10 +24,17 @@ export default function PlayerCard({
         </ShoppingCart>
       )}
       <h3>{player.name}</h3>
-      <p>{player.price}</p>
-      <p>{player.club}</p>
-      <p>{player.position}</p>
-      <a href={`mailto:${player.email}`}>{player.email}</a>
+      <DetailsFlexbox>
+        <div>
+          <p>Price: {player.price}</p>
+          <p>Club: {player.club}</p>
+          <p>Position: {player.position}</p>
+          <a href={`mailto:${player.email}`}>{player.email}</a>
+        </div>
+        {player.image && (
+          <PlayerImage src={serverUrl() + '/assets/' + player.image.name} />
+        )}
+      </DetailsFlexbox>
       <EditBar>
         <EditIcon onClick={() => onOpenEditModal(player)}>
           <StyledPen />
@@ -47,7 +60,7 @@ const Card = styled.article`
   border-radius: 0.4rem;
   color: hsl(160, 96%, 96%);
   padding: 1.2rem 1rem;
-  height: 12rem;
+  height: 15rem;
   min-width: calc((100% - 1rem) / 3);
   position: relative;
 
@@ -88,6 +101,12 @@ const DeleteFunction = styled.span`
   font-size: 1.3rem;
 `;
 
+const DetailsFlexbox = styled.div`
+  display: flex;
+  flex-direction: wrap;
+  justify-content: space-between;
+`;
+
 const StyledPen = styled(Pen)`
   fill: white;
   height: 1rem;
@@ -105,4 +124,8 @@ const ShoppingCart = styled.button`
   right: 0.2rem;
   top: 0.5rem;
   z-index: 10;
+`;
+
+const PlayerImage = styled.img`
+  width: 5rem;
 `;

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const playerSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const playerSchema = new Schema({
   name: String,
   price: Number,
   free_transfer: Boolean,
@@ -8,6 +10,7 @@ const playerSchema = new mongoose.Schema({
   position: String,
   skills: Array,
   email: String,
+  image: { type: Schema.Types.ObjectId, ref: 'Image' },
 });
 
 const Player = mongoose.model('Player', playerSchema);

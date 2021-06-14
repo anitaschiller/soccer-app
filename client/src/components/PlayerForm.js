@@ -27,6 +27,7 @@ export default function PlayerForm({
     position: '',
     skills: [],
     email: '',
+    image: '',
   };
   const [player, setPlayer] = useState(playerToEdit ?? initialPlayerState);
   const [isError, setIsError] = useState(false);
@@ -65,6 +66,25 @@ export default function PlayerForm({
       setIsError(true);
       setTimeout(() => setIsError(false), 4000);
     }
+  }
+
+  function handleImageUpload(event) {
+    const url = '/upload';
+    const formData = new FormData();
+    formData.append('image', event.target.files[0]);
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((result) => result.json())
+      .then((image) => setPlayer({ ...player, image: image }))
+      .catch((error) => console.error(error.message));
+  }
+
+  function serverUrl() {
+    return process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000'
+      : '';
   }
 
   return (
@@ -159,7 +179,15 @@ export default function PlayerForm({
         onUpdateTags={updateSkills}
         onDeleteTag={deleteSkill}
       />
-
+      <label>Add image</label>
+      <input type="file" name="image" onChange={handleImageUpload} />
+      {player.image && (
+        <img
+          src={serverUrl() + '/assets/' + player.image.name}
+          width="100"
+          alt="profile image"
+        />
+      )}
       <label htmlFor="email">Contact Email</label>
       <input
         type="text"

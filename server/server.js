@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
+import fileUpload from 'express-fileupload';
 import { dirname } from './lib/pathHelpers.js';
 import clubRoutes from './routes/club.routes.js';
 import playerRoutes from './routes/player.routes.js';
 import shoppingCartRoutes from './routes/shoppingCart.routes.js';
 import maintenanceRoutes from './routes/maintenanceRoutes.routes.js';
+import assetRoutes from './routes/asset.routes.js';
 
 const __dirname = dirname(import.meta.url);
 
@@ -31,6 +33,7 @@ const server = express();
 
 server.use(cors());
 server.use(express.json());
+server.use(fileUpload());
 
 server.get('/health', (req, res) => {
   res.json({ status: 'Server is running' });
@@ -40,10 +43,13 @@ server.use(clubRoutes);
 server.use(playerRoutes);
 server.use(shoppingCartRoutes);
 server.use(maintenanceRoutes);
+server.use(assetRoutes);
 
+server.use(express.static('./server/public'));
 server.use(express.static(path.join(__dirname, '../client/build')));
 server.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-server.listen(4000);
+const port = process.env.PORT || 4000;
+server.listen(port, () => `Server is listening on port ${port}`);
