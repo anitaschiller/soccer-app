@@ -13,8 +13,10 @@ function getPlayers(req, res) {
 }
 
 async function sendPlayer(req, res) {
+  const image = req.body.image;
   const newPlayer = new Player({
     ...req.body,
+    image: image && image !== '' ? image : null,
   });
 
   try {
@@ -23,15 +25,17 @@ async function sendPlayer(req, res) {
       .populate('image')
       .execPopulate();
     res.json(savedPlayerWithImage);
-  } catch {
+  } catch (error) {
     res.json({ success: false, message: error.message });
   }
 }
 
 async function updatePlayer(req, res) {
   const { playerId } = req.params;
+  const image = req.body.image;
   const playerToUpdate = {
     ...req.body,
+    image: image && image !== '' ? image : null,
   };
 
   try {
@@ -40,7 +44,7 @@ async function updatePlayer(req, res) {
       playerToUpdate
     ).populate('image');
     res.json(updatedPlayer);
-  } catch {
+  } catch (error) {
     res.json({ success: false, message: error.message });
   }
 }
