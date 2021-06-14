@@ -51,4 +51,5 @@ server.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-server.listen(4000);
+const port = process.env.PORT || 4000;
+server.listen(port, () => `Server is listening on port ${port}`);
