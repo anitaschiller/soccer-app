@@ -32,7 +32,12 @@ export default function PlayerCard({
           <a href={`mailto:${player.email}`}>{player.email}</a>
         </div>
         {player.image && (
-          <PlayerImage src={serverUrl() + '/assets/' + player.image.name} />
+          <div>
+            <PlayerImage
+              src={serverUrl() + '/assets/' + player.image.name}
+              width="100"
+            />
+          </div>
         )}
       </DetailsFlexbox>
       <EditBar>
@@ -127,5 +132,5 @@ const ShoppingCart = styled.button`
 `;
 
 const PlayerImage = styled.img`
-  width: 5rem;
+  height: auto;
 `;
