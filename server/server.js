@@ -33,7 +33,7 @@ const server = express();
 
 server.use(cors());
 server.use(express.json());
-server.use(fileUpload({ useTempFiles: true, tempFileDir: '/tmp/' }));
+server.use(fileUpload());
 
 server.get('/health', (req, res) => {
   res.json({ status: 'Server is running' });
