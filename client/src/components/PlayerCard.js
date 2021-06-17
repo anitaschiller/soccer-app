@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ReactComponent as Football } from '../assets/football.svg';
 import { ReactComponent as Pen } from '../assets/pencil.svg';
+import imageUrl from '../lib/helpers';
 
 export default function PlayerCard({
   player,
@@ -10,12 +11,6 @@ export default function PlayerCard({
   onOpenEditModal,
   activeClub,
 }) {
-  function serverUrl() {
-    return process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000'
-      : '';
-  }
-
   return (
     <Card data-testid="player-card">
       {activeClub && (
@@ -33,10 +28,7 @@ export default function PlayerCard({
         </div>
         {player.image && (
           <div>
-            <PlayerImage
-              src={serverUrl() + '/assets/' + player.image.name}
-              width="100"
-            />
+            <PlayerImage src={imageUrl(player.image.name)} width="100" />
           </div>
         )}
       </DetailsFlexbox>

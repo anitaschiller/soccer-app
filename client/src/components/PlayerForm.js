@@ -5,6 +5,7 @@ import styled from 'styled-components/macro';
 import Tags from './Tags';
 
 import validatePlayer from '../lib/validation';
+import imageUrl from '../lib/helpers';
 
 PlayerForm.propTypes = {
   headlineText: PropTypes.string,
@@ -79,12 +80,6 @@ export default function PlayerForm({
       .then((result) => result.json())
       .then((image) => setPlayer({ ...player, image: image }))
       .catch((error) => console.error(error.message));
-  }
-
-  function serverUrl() {
-    return process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000'
-      : '';
   }
 
   return (
@@ -183,7 +178,7 @@ export default function PlayerForm({
       <input type="file" name="image" onChange={handleImageUpload} />
       {player.image && (
         <img
-          src={serverUrl() + '/assets/' + player.image.name}
+          src={imageUrl(player.image.name)}
           width="100"
           alt="profile image"
         />
