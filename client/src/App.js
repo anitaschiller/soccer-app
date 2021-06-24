@@ -161,35 +161,35 @@ function App() {
         activeClub={activeClub}
       />
       <main>
-        <Switch>
-          <Route exact path="/">
-            <Home
-              players={players}
-              onAddToShoppingCart={addToShoppingCart}
-              onDeletePlayer={deletePlayer}
-              clubs={clubs}
-              onAddPlayer={updatePlayer}
-              openEditModal={() => setIsShowingEditModal(true)}
-              isShowingEditModal={isShowingEditModal}
-              activeClub={activeClub}
-            />
-          </Route>
-          <Route path="/addplayer">
-            <PlayerForm
-              headlineText={'Add a new player'}
-              onAddPlayer={addPlayer}
-              clubs={clubs}
-            />
-          </Route>
-          <Route path="/cart">
-            <ThemeContext.Provider value={{ activeClub }}>
+        <ThemeContext.Provider value={{ activeClub }}>
+          <Switch>
+            <Route exact path="/">
+              <Home
+                players={players}
+                onAddToShoppingCart={addToShoppingCart}
+                onDeletePlayer={deletePlayer}
+                clubs={clubs}
+                onAddPlayer={updatePlayer}
+                openEditModal={() => setIsShowingEditModal(true)}
+                isShowingEditModal={isShowingEditModal}
+                activeClub={activeClub}
+              />
+            </Route>
+            <Route path="/addplayer">
+              <PlayerForm
+                headlineText={'Add a new player'}
+                onAddPlayer={addPlayer}
+                clubs={clubs}
+              />
+            </Route>
+            <Route path="/cart">
               <ShoppingCart
                 shoppingCart={shoppingCart}
                 onRemovePlayer={removePlayer}
               />
-            </ThemeContext.Provider>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </ThemeContext.Provider>
       </main>
     </>
   );
